@@ -15,6 +15,7 @@ namespace BasicBilling.Data.Contexts
     public DbSet<Bill> Bills { get; set; } = default!;
     public DbSet<Client> Clients { get; set; } = default!;
     public DbSet<Service> Services { get; set; } = default!;
+    public DbSet<Payment> Payment { get; set; } = default!;
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
     {

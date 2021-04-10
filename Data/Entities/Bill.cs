@@ -9,8 +9,13 @@ namespace BasicBilling.Data.Entities
     [Required]
     public int Period { get; set; }
 
+    [Required]
+    public Client Client { get; set; } = default!;
+
+    [Required]
     public Service Service { get; set; } = default!;
 
+    [Required]
     public BillingStatus Status { get; set; } = default!;
   }
 }

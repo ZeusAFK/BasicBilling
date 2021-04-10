@@ -1,13 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using BasicBilling.Data.Abstracts;
 
 namespace BasicBilling.Data.Entities
 {
-  public class Client
+  public class Client : AbstractDatabaseEntity
   {
-    [Key]
-    [Required]
-    public int Id { get; set; }
-
     [Required]
     [MaxLength(250)]
     public string Firstname { get; set; } = default!;

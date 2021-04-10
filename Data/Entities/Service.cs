@@ -1,13 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using BasicBilling.Data.Abstracts;
 
 namespace BasicBilling.Data.Entities
 {
-  public class Service
+  public class Service : AbstractDatabaseEntity
   {
-    [Key]
-    [Required]
-    public int Id { get; set; }
-
     [Required]
     public string Shortname { get; set; } = default!;
 
