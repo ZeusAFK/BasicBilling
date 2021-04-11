@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "z/zDieFnat5bBbx6fBfPNtjk6WHJClX+Q5hLwWTytShiyhWEBQT1lA/W5RhK9Z+xJkVT+nlGY0vNCO/pcY+j1g==",
+  "dgSpecHash": "/c+Thn5YHM3hRwsS9H4TZ9RopyOkZsXIQmnxI9WPEBSWC3RHgpHjZc4dD+xINf1f3P8h2UIit4k8KxxgzEeniA==",
   "success": true,
-  "projectFilePath": "C:\\zeusafk\\projects\\BasicBilling.API\\BasicBilling.API.csproj",
+  "projectFilePath": "C:\\ZeusAFK\\projects\\BasicBilling\\BasicBilling.API\\BasicBilling.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\zeusafk\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\zeusafk\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

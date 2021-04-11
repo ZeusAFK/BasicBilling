@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\zeusafk\\projects\\BasicBilling.API\\BasicBilling.API.csproj": {}
+    "C:\\ZeusAFK\\projects\\BasicBilling\\BasicBilling.API\\BasicBilling.API.csproj": {}
   },
   "projects": {
-    "C:\\zeusafk\\projects\\BasicBilling.API\\BasicBilling.API.csproj": {
+    "C:\\ZeusAFK\\projects\\BasicBilling\\BasicBilling.API\\BasicBilling.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\zeusafk\\projects\\BasicBilling.API\\BasicBilling.API.csproj",
+        "projectUniqueName": "C:\\ZeusAFK\\projects\\BasicBilling\\BasicBilling.API\\BasicBilling.API.csproj",
         "projectName": "BasicBilling.API",
-        "projectPath": "C:\\zeusafk\\projects\\BasicBilling.API\\BasicBilling.API.csproj",
+        "projectPath": "C:\\ZeusAFK\\projects\\BasicBilling\\BasicBilling.API\\BasicBilling.API.csproj",
         "packagesPath": "C:\\Users\\zeusafk\\.nuget\\packages\\",
-        "outputPath": "C:\\zeusafk\\projects\\BasicBilling.API\\obj\\",
+        "outputPath": "C:\\ZeusAFK\\projects\\BasicBilling\\BasicBilling.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\zeusafk\\AppData\\Roaming\\NuGet\\NuGet.Config"
