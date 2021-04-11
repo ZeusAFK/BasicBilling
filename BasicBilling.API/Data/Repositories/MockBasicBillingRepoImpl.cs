@@ -17,11 +17,11 @@ namespace BasicBilling.Data.Repositories
     public MockBasicBillingRepoImpl()
     {
       Clients = new List<Client>(){
-        new Client(){ Id = 100, Firstname = "Joseph", Lastname = "Carlton" },
-        new Client(){ Id = 200, Firstname = "Maria", Lastname = "Juarez" },
-        new Client(){ Id = 300, Firstname = "Albert", Lastname = "Kenny" },
-        new Client(){ Id = 400, Firstname = "Jessica", Lastname = "Phillips" },
-        new Client(){ Id = 500, Firstname = "Charles", Lastname = "Johnson" }
+        new Client(){ Id = 100, Firstname = "Joseph", Lastname = "Carlton", Document = "651655" },
+        new Client(){ Id = 200, Firstname = "Maria", Lastname = "Juarez", Document = "961985" },
+        new Client(){ Id = 300, Firstname = "Albert", Lastname = "Kenny", Document = "9819685" },
+        new Client(){ Id = 400, Firstname = "Jessica", Lastname = "Phillips", Document = "69846" },
+        new Client(){ Id = 500, Firstname = "Charles", Lastname = "Johnson", Document = "65984" }
       };
 
       Services = new List<Service>(){

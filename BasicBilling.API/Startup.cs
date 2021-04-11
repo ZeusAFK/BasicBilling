@@ -30,6 +30,7 @@ namespace BasicBilling.API
       services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
       services.AddScoped<IBasicBillingRepo, SqliteBasicBillingRepoImpl>();
+      //services.AddScoped<IBasicBillingRepo, MockBasicBillingRepoImpl>();
 
       services.AddSwaggerGen(c =>
       {

@@ -107,7 +107,7 @@ namespace BasicBilling.API.Migrations
 
                     b.HasIndex("BillId");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("BasicBilling.Data.Entities.Service", b =>

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BasicBilling.API.Migrations
 {
     [DbContext(typeof(BasicBillingContext))]
-    [Migration("20210411004956_initial_migration")]
+    [Migration("20210411165252_initial_migration")]
     partial class initial_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -109,7 +109,7 @@ namespace BasicBilling.API.Migrations
 
                     b.HasIndex("BillId");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("BasicBilling.Data.Entities.Service", b =>

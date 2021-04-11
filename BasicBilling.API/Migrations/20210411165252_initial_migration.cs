@@ -74,7 +74,7 @@ namespace BasicBilling.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payment",
+                name: "Payments",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -85,9 +85,9 @@ namespace BasicBilling.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Payment", x => x.Id);
+                    table.PrimaryKey("PK_Payments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payment_Bills_BillId",
+                        name: "FK_Payments_Bills_BillId",
                         column: x => x.BillId,
                         principalTable: "Bills",
                         principalColumn: "Id",
@@ -105,15 +105,15 @@ namespace BasicBilling.API.Migrations
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payment_BillId",
-                table: "Payment",
+                name: "IX_Payments_BillId",
+                table: "Payments",
                 column: "BillId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Payment");
+                name: "Payments");
 
             migrationBuilder.DropTable(
                 name: "Bills");
