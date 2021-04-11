@@ -30,6 +30,12 @@ namespace BasicBilling.Data.Repositories
       context.Clients.Add(client);
     }
 
+    public void CreatePayment(Payment payment)
+    {
+      if (payment == null) throw new ArgumentNullException(nameof(payment));
+      context.Payment.Add(payment);
+    }
+
     public void CreateService(Service service)
     {
       if (service == null) throw new ArgumentNullException(nameof(service));
@@ -46,6 +52,11 @@ namespace BasicBilling.Data.Repositories
       return context.Services.ToList();
     }
 
+    public Bill GetBillByClientServiceAndPeriod(Client client, Service service, int period)
+    {
+      return context.Bills.FirstOrDefault(e => e.Client.Id == client.Id && e.Service.Id == service.Id && e.Period == period);
+    }
+
     public Bill GetBillById(int id)
     {
       return context.Bills.Include("Service").Include("Client").FirstOrDefault(e => e.Id == id);
@@ -54,6 +65,16 @@ namespace BasicBilling.Data.Repositories
     public Client GetClientById(int id)
     {
       return context.Clients.FirstOrDefault(e => e.Id == id);
+    }
+
+    public Payment GetPaymentById(int id)
+    {
+      return context.Payment.Include("Bill").FirstOrDefault(e => e.Id == id);
+    }
+
+    public IEnumerable<Payment> GetPaymentsByService(Service service)
+    {
+      return context.Payment.Include("Bill").Include("Bill.Client").Where(e => e.Bill.Service.Id == service.Id).ToList();
     }
 
     public IEnumerable<Bill> GetPendingBillsByClient(int ClientId)

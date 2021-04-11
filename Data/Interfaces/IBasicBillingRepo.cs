@@ -25,7 +25,14 @@ namespace BasicBilling.Data.Interfaces
     #region Bills
     void CreateBill(Bill bill);
     Bill GetBillById(int id);
+    Bill GetBillByClientServiceAndPeriod(Client client, Service service, int period);
     IEnumerable<Bill> GetPendingBillsByClient(int ClientId);
+    #endregion
+
+    #region Payments
+    Payment GetPaymentById(int id);
+    IEnumerable<Payment> GetPaymentsByService(Service service);
+    void CreatePayment(Payment payment);
     #endregion
   }
 }

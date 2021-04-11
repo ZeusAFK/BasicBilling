@@ -33,12 +33,66 @@ namespace BasicBilling.Controllers
       return Ok(mapper.Map<BillReadDto>(billEntity));
     }
 
+    [HttpGet("payment/{id}", Name = "GetPaymentById")]
+    public ActionResult<PaymentReadDto> GetPaymentById(int id)
+    {
+      var paymentEntity = repository.GetPaymentById(id);
+
+      if (paymentEntity == null) return NotFound();
+
+      return Ok(mapper.Map<PaymentReadDto>(paymentEntity));
+    }
+
     [HttpGet("pending")]
     public ActionResult<IEnumerable<BillReadDto>> GetPendingBillsByClient([FromQuery] int ClientId)
     {
       var billEntities = repository.GetPendingBillsByClient(ClientId);
 
       return Ok(mapper.Map<IEnumerable<BillReadDto>>(billEntities));
+    }
+
+    [HttpPost("pay")]
+    public ActionResult CreatePyment(PaymentCreateDto paymentCreateDto){
+      var serviceEntity = repository.GetServiceByShortname(paymentCreateDto.category);
+
+      if (serviceEntity == null) return BadRequest();
+
+      var clientEntity = repository.GetClientById(paymentCreateDto.ClientId);
+
+      if (clientEntity == null) return BadRequest();
+
+      int period = paymentCreateDto.period;
+
+      var regex = @"^\d{4}(0[1-9]|1[0-2])$";
+      var match = Regex.Match(period.ToString(), regex, RegexOptions.IgnoreCase);
+
+      if (!match.Success) return BadRequest();
+
+      var billEntity = repository.GetBillByClientServiceAndPeriod(clientEntity, serviceEntity, period);
+
+      if (billEntity == null || billEntity.Status == BillingStatus.Paid) return BadRequest();
+
+      Payment payment = new Payment();
+      billEntity.Status = BillingStatus.Paid;
+      payment.Bill = billEntity;
+
+      repository.CreatePayment(payment);
+      repository.SaveChanges();
+
+      var paymentReadDto = mapper.Map<PaymentReadDto>(payment);
+
+      return CreatedAtRoute(nameof(GetPaymentById), new { Id = paymentReadDto.Id }, paymentReadDto);
+    }
+
+    [HttpGet("search")]
+    public ActionResult<IEnumerable<PaymentReadDto>> GetPaymentsByServiceShortname([FromQuery] string category){
+      var serviceEntity = repository.GetServiceByShortname(category);
+
+      if (serviceEntity == null) return BadRequest();
+
+      var paymentEntities = repository.GetPaymentsByService(serviceEntity);
+
+      return Ok(mapper.Map<IEnumerable<PaymentReadDto>>(paymentEntities));
     }
 
     [HttpPost("bills")]
