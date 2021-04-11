@@ -1,24 +1,21 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace BasicBilling.Data.Abstracts
 {
 
-  public abstract class AbstractDatabaseEntity
+  public abstract class AbstractEntityModel
   {
-    [Key]
-    [Required]
     public int Id { get; set; }
 
     public DateTime CreatedOn { get; set; }
     public DateTime UpdatedOn { get; set; }
 
-    public AbstractDatabaseEntity(int Id)
+    public AbstractEntityModel(int Id)
     {
       this.Id = Id;
     }
 
-    public AbstractDatabaseEntity() : base()
+    public AbstractEntityModel() : base()
     {
 
     }
