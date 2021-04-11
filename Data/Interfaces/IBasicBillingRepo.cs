@@ -15,7 +15,11 @@ namespace BasicBilling.Data.Interfaces
     #endregion
 
     #region Services
+    IEnumerable<Service> GetAllServices();
     Service GetServiceByShortname(string shortname);
+    Service GetServiceById(int id);
+    void CreateService(Service service);
+    void UpdateService(Service service);
     #endregion
 
     #region Bills

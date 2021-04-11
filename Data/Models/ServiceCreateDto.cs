@@ -3,7 +3,7 @@ using BasicBilling.Data.Abstracts;
 
 namespace BasicBilling.Data.Models
 {
-  public class ServiceReadDto : AbstractEntityModel
+  public class ServiceCreateDto
   {
     [Required]
     public string Shortname { get; set; } = default!;

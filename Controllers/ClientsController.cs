@@ -15,18 +15,18 @@ namespace BasicBilling.Controllers
     private readonly IBasicBillingRepo repository = default!;
     private readonly IMapper mapper = default!;
 
-    [HttpGet]
-    public ActionResult<IEnumerable<ClientReadDto>> GetAllCommmands()
-    {
-      var clientEntities = repository.GetAllClients();
-
-      return Ok(mapper.Map<IEnumerable<ClientReadDto>>(clientEntities));
-    }
-
     public ClientsController(IBasicBillingRepo repository, IMapper mapper)
     {
       this.repository = repository;
       this.mapper = mapper;
+    }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<ClientReadDto>> GetAllClients()
+    {
+      var clientEntities = repository.GetAllClients();
+
+      return Ok(mapper.Map<IEnumerable<ClientReadDto>>(clientEntities));
     }
 
     [HttpGet("{id}", Name = "GetClientById")]
@@ -40,7 +40,7 @@ namespace BasicBilling.Controllers
     }
 
     [HttpPost()]
-    public ActionResult<BillReadDto> CreateClient(ClientCreateDto clientCreateDto)
+    public ActionResult<ClientReadDto> CreateClient(ClientCreateDto clientCreateDto)
     {
       var clientEntity = mapper.Map<Client>(clientCreateDto);
       repository.CreateClient(clientEntity);

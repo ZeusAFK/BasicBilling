@@ -12,6 +12,9 @@ namespace Commander.Profiles
       CreateMap<Client, ClientReadDto>();
       CreateMap<ClientCreateDto, Client>();
       CreateMap<ClientUpdateDto, Client>();
+      CreateMap<Service, ServiceReadDto>();
+      CreateMap<ServiceCreateDto, Service>();
+      CreateMap<ServiceUpdateDto, Service>();
     }
   }
 }

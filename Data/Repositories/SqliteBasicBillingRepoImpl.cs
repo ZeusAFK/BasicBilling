@@ -28,9 +28,20 @@ namespace BasicBilling.Data.Repositories
       context.Clients.Add(client);
     }
 
+    public void CreateService(Service service)
+    {
+      if (service == null) throw new ArgumentNullException(nameof(service));
+      context.Services.Add(service);
+    }
+
     public IEnumerable<Client> GetAllClients()
     {
       return context.Clients.ToList();
+    }
+
+    public IEnumerable<Service> GetAllServices()
+    {
+      return context.Services.ToList();
     }
 
     public Bill GetBillById(int id)
@@ -41,6 +52,11 @@ namespace BasicBilling.Data.Repositories
     public Client GetClientById(int id)
     {
       return context.Clients.FirstOrDefault(e => e.Id == id);
+    }
+
+    public Service GetServiceById(int id)
+    {
+      return context.Services.FirstOrDefault(e => e.Id == id);
     }
 
     public Service GetServiceByShortname(string shortname)
@@ -54,6 +70,11 @@ namespace BasicBilling.Data.Repositories
     }
 
     public void UpdateClient(Client client)
+    {
+      
+    }
+
+    public void UpdateService(Service service)
     {
       
     }
