@@ -33,7 +33,7 @@ namespace BasicBilling.Data.Repositories
     public void CreatePayment(Payment payment)
     {
       if (payment == null) throw new ArgumentNullException(nameof(payment));
-      context.Payment.Add(payment);
+      context.Payments.Add(payment);
     }
 
     public void CreateService(Service service)
@@ -69,12 +69,12 @@ namespace BasicBilling.Data.Repositories
 
     public Payment GetPaymentById(int id)
     {
-      return context.Payment.Include("Bill").FirstOrDefault(e => e.Id == id);
+      return context.Payments.Include("Bill").FirstOrDefault(e => e.Id == id);
     }
 
     public IEnumerable<Payment> GetPaymentsByService(Service service)
     {
-      return context.Payment.Include("Bill").Include("Bill.Client").Where(e => e.Bill.Service.Id == service.Id).ToList();
+      return context.Payments.Include("Bill").Include("Bill.Client").Where(e => e.Bill.Service.Id == service.Id).ToList();
     }
 
     public IEnumerable<Bill> GetPendingBillsByClient(int ClientId)
