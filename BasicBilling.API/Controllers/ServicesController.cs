@@ -22,11 +22,11 @@ namespace BasicBilling.Controllers
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<ClientReadDto>> GetAllServices()
+    public ActionResult<IEnumerable<ServiceReadDto>> GetAllServices()
     {
-      var clientEntities = repository.GetAllClients();
+      var serviceEntities = repository.GetAllServices();
 
-      return Ok(mapper.Map<IEnumerable<ClientReadDto>>(clientEntities));
+      return Ok(mapper.Map<IEnumerable<ServiceReadDto>>(serviceEntities));
     }
 
     [HttpGet("{id}", Name = "GetServiceById")]
@@ -42,6 +42,8 @@ namespace BasicBilling.Controllers
     [HttpPost()]
     public ActionResult<ServiceReadDto> CreateService(ServiceCreateDto serviceCreateDto)
     {
+      if (serviceCreateDto.Shortname.Equals("")) return BadRequest();
+
       var serviceEntity = mapper.Map<Service>(serviceCreateDto);
       repository.CreateService(serviceEntity);
       repository.SaveChanges();
@@ -54,6 +56,8 @@ namespace BasicBilling.Controllers
     [HttpPut("{id}")]
     public ActionResult UpdateService(int id, ServiceUpdateDto serviceUpdateDto)
     {
+      if (serviceUpdateDto.Shortname.Equals("")) return BadRequest();
+
       var serviceEntity = repository.GetServiceById(id);
 
       if (serviceEntity == null) return NotFound();

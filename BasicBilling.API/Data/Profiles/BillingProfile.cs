@@ -2,7 +2,7 @@ using AutoMapper;
 using BasicBilling.Data.Entities;
 using BasicBilling.Data.Models;
 
-namespace Commander.Profiles
+namespace BasicBilling.Profiles
 {
   public class BillingProfile : Profile
   {

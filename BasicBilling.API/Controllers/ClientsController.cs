@@ -42,6 +42,9 @@ namespace BasicBilling.Controllers
     [HttpPost()]
     public ActionResult<ClientReadDto> CreateClient(ClientCreateDto clientCreateDto)
     {
+      if (clientCreateDto.Firstname.Equals("") || clientCreateDto.Lastname.Equals("") || clientCreateDto.Document.Equals(""))
+        return BadRequest();
+
       var clientEntity = mapper.Map<Client>(clientCreateDto);
       repository.CreateClient(clientEntity);
       repository.SaveChanges();
@@ -54,6 +57,9 @@ namespace BasicBilling.Controllers
     [HttpPut("{id}")]
     public ActionResult UpdateClient(int id, ClientUpdateDto clientUpdateDto)
     {
+      if (clientUpdateDto.Firstname.Equals("") || clientUpdateDto.Lastname.Equals("") || clientUpdateDto.Document.Equals(""))
+        return BadRequest();
+
       var clientEntity = repository.GetClientById(id);
 
       if (clientEntity == null) return NotFound();
