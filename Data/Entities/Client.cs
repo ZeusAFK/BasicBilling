@@ -15,5 +15,9 @@ namespace BasicBilling.Data.Entities
     [Required]
     [MaxLength(250)]
     public string Lastname { get; set; } = default!;
+
+    [Required]
+    [MaxLength(50)]
+    public string Document { get; set; } = default!;
   }
 }
