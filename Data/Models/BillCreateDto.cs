@@ -11,6 +11,9 @@ namespace BasicBilling.Data.Models
     public int period { get; set; }
 
     [Required]
+    public decimal Amount { get; set; } = default!;
+
+    [Required]
     public string category { get; set; } = default!;
   }
 }

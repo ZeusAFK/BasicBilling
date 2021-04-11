@@ -17,7 +17,8 @@ namespace BasicBilling.Data.Entities
     public Service Service { get; set; } = default!;
 
     [Column(TypeName = "money")]
-    public decimal Amount { get; set; }
+    [Required]
+    public decimal Amount { get; set; } = default!;
 
     [Required]
     public BillingStatus Status { get; set; } = default!;

@@ -11,6 +11,6 @@ namespace BasicBilling.Data.Models
 
     public ServiceReadDto Service { get; set; } = default!;
 
-    public BillingStatus BillingStatus { get; set; } = default!;
+    public BillingStatus Status { get; set; } = default!;
   }
 }

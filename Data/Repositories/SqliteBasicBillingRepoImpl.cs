@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using BasicBilling.Data.Contexts;
 using BasicBilling.Data.Entities;
+using BasicBilling.Data.Enums;
 using BasicBilling.Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BasicBilling.Data.Repositories
 {
@@ -46,12 +48,17 @@ namespace BasicBilling.Data.Repositories
 
     public Bill GetBillById(int id)
     {
-      return context.Bills.FirstOrDefault(e => e.Id == id);
+      return context.Bills.Include("Service").Include("Client").FirstOrDefault(e => e.Id == id);
     }
 
     public Client GetClientById(int id)
     {
       return context.Clients.FirstOrDefault(e => e.Id == id);
+    }
+
+    public IEnumerable<Bill> GetPendingBillsByClient(int ClientId)
+    {
+      return context.Bills.Include("Service").Include("Client").Where(e => e.Client.Id == ClientId && e.Status == BillingStatus.Pending).ToList();
     }
 
     public Service GetServiceById(int id)
@@ -71,12 +78,12 @@ namespace BasicBilling.Data.Repositories
 
     public void UpdateClient(Client client)
     {
-      
+
     }
 
     public void UpdateService(Service service)
     {
-      
+
     }
   }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using AutoMapper;
 using BasicBilling.Data.Entities;
@@ -32,6 +33,14 @@ namespace BasicBilling.Controllers
       return Ok(mapper.Map<BillReadDto>(billEntity));
     }
 
+    [HttpGet("pending")]
+    public ActionResult<IEnumerable<BillReadDto>> GetPendingBillsByClient([FromQuery] int ClientId)
+    {
+      var billEntities = repository.GetPendingBillsByClient(ClientId);
+
+      return Ok(mapper.Map<IEnumerable<BillReadDto>>(billEntities));
+    }
+
     [HttpPost("bills")]
     public ActionResult<BillReadDto> CreateBill(BillCreateDto billCreateDto)
     {
@@ -50,11 +59,16 @@ namespace BasicBilling.Controllers
 
       if (!match.Success) return BadRequest();
 
+      decimal amount = billCreateDto.Amount;
+
+      if(amount <= 0) return BadRequest();
+
       Bill bill = new Bill();
       bill.Client = clientEntity;
       bill.Service = serviceEntity;
       bill.Period = period;
       bill.Status = BillingStatus.Pending;
+      bill.Amount = amount;
 
       repository.CreateBill(bill);
       repository.SaveChanges();
