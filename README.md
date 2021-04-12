@@ -1,7 +1,7 @@
 # BasicBilling .Net Core 3
   
 ## Documentation
-To access [Swagger](https://swagger.io/) api documentation run the API project and then, browse to http://localhost:8080
+To access [Swagger](https://swagger.io/) api documentation run the API project and then, browse to https://localhost:5001/swagger/index.html
 
 ---
 
