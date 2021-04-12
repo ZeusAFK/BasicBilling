@@ -52,7 +52,8 @@ namespace BasicBilling.Controllers
     }
 
     [HttpPost("pay")]
-    public ActionResult CreatePyment(PaymentCreateDto paymentCreateDto){
+    public ActionResult<PaymentReadDto> CreatePayment(PaymentCreateDto paymentCreateDto)
+    {
       var serviceEntity = repository.GetServiceByShortname(paymentCreateDto.category);
 
       if (serviceEntity == null) return BadRequest();
@@ -85,7 +86,8 @@ namespace BasicBilling.Controllers
     }
 
     [HttpGet("search")]
-    public ActionResult<IEnumerable<PaymentReadDto>> GetPaymentsByServiceShortname([FromQuery] string category){
+    public ActionResult<IEnumerable<PaymentReadDto>> GetPaymentsByServiceShortname([FromQuery] string category)
+    {
       var serviceEntity = repository.GetServiceByShortname(category);
 
       if (serviceEntity == null) return BadRequest();
@@ -115,7 +117,11 @@ namespace BasicBilling.Controllers
 
       decimal amount = billCreateDto.Amount;
 
-      if(amount <= 0) return BadRequest();
+      if (amount <= 0) return BadRequest();
+
+      var billEntity = repository.GetBillByClientServiceAndPeriod(clientEntity, serviceEntity, period);
+
+      if (billEntity != null) return BadRequest();
 
       Bill bill = new Bill();
       bill.Client = clientEntity;

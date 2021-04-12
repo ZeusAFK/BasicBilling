@@ -31,39 +31,39 @@ namespace BasicBilling.Tests
     [Fact]
     public void GetAllClients_WhenCalled_ReturnsOkObjectResult()
     {
-      var okResult = controller.GetAllClients();
-      Assert.IsType<OkObjectResult>(okResult.Result);
+      var response = controller.GetAllClients();
+      Assert.IsType<OkObjectResult>(response.Result);
     }
 
     [Fact]
     public void GetAllClients_WhenCalled_ReturnsAllItems()
     {
-      var okResult = controller.GetAllClients().Result as OkObjectResult;
-      var items = Assert.IsType<List<ClientReadDto>>(okResult.Value);
+      var response = controller.GetAllClients().Result as OkObjectResult;
+      var items = Assert.IsType<List<ClientReadDto>>(response.Value);
       Assert.Equal(5, items.Count);
     }
 
     [Fact]
     public void GetClientById_UnknowIdPassed_ReturnsNotFoundResult()
     {
-      var notFoundResult = controller.GetClientById(132);
-      Assert.IsType<NotFoundResult>(notFoundResult.Result);
+      var response = controller.GetClientById(132);
+      Assert.IsType<NotFoundResult>(response.Result);
     }
 
     [Fact]
     public void GetClientById_ExistingIdPassed_ReturnsOkObjectResult()
     {
-      var okResult = controller.GetClientById(100);
-      Assert.IsType<OkObjectResult>(okResult.Result);
+      var response = controller.GetClientById(100);
+      Assert.IsType<OkObjectResult>(response.Result);
     }
 
     [Fact]
     public void GetClientById_ExistingIdPassed_ReturnsRightItem()
     {
       var testId = 200;
-      var okResult = controller.GetClientById(testId).Result as OkObjectResult;
-      Assert.IsType<ClientReadDto>(okResult.Value);
-      Assert.Equal(testId, (okResult.Value as ClientReadDto).Id);
+      var response = controller.GetClientById(testId).Result as OkObjectResult;
+      Assert.IsType<ClientReadDto>(response.Value);
+      Assert.Equal(testId, (response.Value as ClientReadDto).Id);
     }
 
     [Fact]
@@ -71,25 +71,25 @@ namespace BasicBilling.Tests
     {
       var testItem = new ClientCreateDto() { Firstname = "Fernando", Lastname = "", Document = "" };
       controller.ModelState.AddModelError("Lastname", "Required");
-      var badResponse = controller.CreateClient(testItem);
-      Assert.IsType<BadRequestResult>(badResponse.Result);
+      var response = controller.CreateClient(testItem);
+      Assert.IsType<BadRequestResult>(response.Result);
     }
 
     [Fact]
     public void CreateClient_ValidObjectPassed_ReturnsCreatedAtRouteResult()
     {
-      var testItem = new ClientCreateDto() { Firstname = "Fernando", Lastname = "Zabala", Document = "123854" };
-      var createdResponse = controller.CreateClient(testItem);
-      Assert.IsType<CreatedAtRouteResult>(createdResponse.Result);
+      var testItem = new ClientCreateDto() { Firstname = "Fernando", Lastname = "Zabala", Document = "A1242" };
+      var response = controller.CreateClient(testItem);
+      Assert.IsType<CreatedAtRouteResult>(response.Result);
     }
 
     [Fact]
-    public void CreateClient_ValidObjectPassed_ReturnedResponseHasCreatedItem()
+    public void CreateClient_ValidObjectPassed_ReturnsResponseHasCreatedItem()
     {
-      var testItem = new ClientCreateDto() { Firstname = "Fernando", Lastname = "Zabala", Document = "123854" };
+      var testItem = new ClientCreateDto() { Firstname = "Fernando", Lastname = "Zabala", Document = "A1242" };
 
-      var createdResponse = controller.CreateClient(testItem).Result as CreatedAtRouteResult;
-      var item = createdResponse.Value as ClientReadDto;
+      var response = controller.CreateClient(testItem).Result as CreatedAtRouteResult;
+      var item = response.Value as ClientReadDto;
 
       Assert.IsType<ClientReadDto>(item);
       Assert.Equal(testItem.Firstname, item.Firstname);
@@ -103,26 +103,26 @@ namespace BasicBilling.Tests
       int clientId = 100;
       var testItem = new ClientUpdateDto() { Firstname = "Fernando", Lastname = "", Document = "" };
       controller.ModelState.AddModelError("Lastname", "Required");
-      var badResponse = controller.UpdateClient(clientId, testItem);
-      Assert.IsType<BadRequestResult>(badResponse);
+      var response = controller.UpdateClient(clientId, testItem);
+      Assert.IsType<BadRequestResult>(response);
     }
 
     [Fact]
     public void UpdateClient_ValidObjectPassed_ReturnsNoContentResult()
     {
       int clientId = 100;
-      var testItem = new ClientUpdateDto() { Firstname = "Fernando", Lastname = "Zabala", Document = "123854" };
-      var createdResponse = controller.UpdateClient(clientId, testItem);
-      Assert.IsType<NoContentResult>(createdResponse);
+      var testItem = new ClientUpdateDto() { Firstname = "Fernando", Lastname = "Zabala", Document = "A1242" };
+      var response = controller.UpdateClient(clientId, testItem);
+      Assert.IsType<NoContentResult>(response);
     }
 
     [Fact]
     public void UpdateClient_ValidObjectPassed_ReturnedResponseHasUpdatedItem()
     {
       int clientId = 100;
-      var testItem = new ClientUpdateDto() { Firstname = "Fernando", Lastname = "Zabala", Document = "123854" };
-      var createdResponse = controller.UpdateClient(clientId, testItem);
-      Assert.IsType<NoContentResult>(createdResponse);
+      var testItem = new ClientUpdateDto() { Firstname = "Fernando", Lastname = "Zabala", Document = "A1242" };
+      var response = controller.UpdateClient(clientId, testItem);
+      Assert.IsType<NoContentResult>(response);
 
       var okResult = controller.GetClientById(clientId).Result as OkObjectResult;
       Assert.IsType<ClientReadDto>(okResult.Value);

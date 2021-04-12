@@ -31,39 +31,39 @@ namespace BasicBilling.Tests
     [Fact]
     public void GetAllServices_WhenCalled_ReturnsOkObjectResult()
     {
-      var okResult = controller.GetAllServices();
-      Assert.IsType<OkObjectResult>(okResult.Result);
+      var response = controller.GetAllServices();
+      Assert.IsType<OkObjectResult>(response.Result);
     }
 
     [Fact]
     public void GetAllServices_WhenCalled_ReturnsAllItems()
     {
-      var okResult = controller.GetAllServices().Result as OkObjectResult;
-      var items = Assert.IsType<List<ServiceReadDto>>(okResult.Value);
+      var response = controller.GetAllServices().Result as OkObjectResult;
+      var items = Assert.IsType<List<ServiceReadDto>>(response.Value);
       Assert.Equal(3, items.Count);
     }
 
     [Fact]
     public void GetServiceById_UnknowIdPassed_ReturnsNotFoundResult()
     {
-      var notFoundResult = controller.GetServiceById(132);
-      Assert.IsType<NotFoundResult>(notFoundResult.Result);
+      var response = controller.GetServiceById(132);
+      Assert.IsType<NotFoundResult>(response.Result);
     }
 
     [Fact]
     public void GetServiceById_ExistingIdPassed_ReturnsOkObjectResult()
     {
-      var okResult = controller.GetServiceById(1);
-      Assert.IsType<OkObjectResult>(okResult.Result);
+      var response = controller.GetServiceById(1);
+      Assert.IsType<OkObjectResult>(response.Result);
     }
 
     [Fact]
     public void GetServiceById_ExistingIdPassed_ReturnsRightItem()
     {
       var testId = 2;
-      var okResult = controller.GetServiceById(testId).Result as OkObjectResult;
-      Assert.IsType<ServiceReadDto>(okResult.Value);
-      Assert.Equal(testId, (okResult.Value as ServiceReadDto).Id);
+      var response = controller.GetServiceById(testId).Result as OkObjectResult;
+      Assert.IsType<ServiceReadDto>(response.Value);
+      Assert.Equal(testId, (response.Value as ServiceReadDto).Id);
     }
 
     [Fact]
@@ -71,16 +71,16 @@ namespace BasicBilling.Tests
     {
       var testItem = new ServiceCreateDto() { Shortname = "", Name = "" };
       controller.ModelState.AddModelError("Shortname", "Required");
-      var badResponse = controller.CreateService(testItem);
-      Assert.IsType<BadRequestResult>(badResponse.Result);
+      var response = controller.CreateService(testItem);
+      Assert.IsType<BadRequestResult>(response.Result);
     }
 
     [Fact]
     public void CreateService_ValidObjectPassed_ReturnsCreatedAtRouteResult()
     {
       var testItem = new ServiceCreateDto() { Shortname = "PHONE", Name = "Phone service" };
-      var createdResponse = controller.CreateService(testItem);
-      Assert.IsType<CreatedAtRouteResult>(createdResponse.Result);
+      var response = controller.CreateService(testItem);
+      Assert.IsType<CreatedAtRouteResult>(response.Result);
     }
 
     [Fact]
@@ -88,8 +88,8 @@ namespace BasicBilling.Tests
     {
       var testItem = new ServiceCreateDto() { Shortname = "PHONE", Name = "Phone service" };
 
-      var createdResponse = controller.CreateService(testItem).Result as CreatedAtRouteResult;
-      var item = createdResponse.Value as ServiceReadDto;
+      var response = controller.CreateService(testItem).Result as CreatedAtRouteResult;
+      var item = response.Value as ServiceReadDto;
 
       Assert.IsType<ServiceReadDto>(item);
       Assert.Equal(testItem.Shortname, item.Shortname);
@@ -102,8 +102,8 @@ namespace BasicBilling.Tests
       int serviceId = 2;
       var testItem = new ServiceUpdateDto() { Shortname = "", Name = "" };
       controller.ModelState.AddModelError("Shortname", "Required");
-      var badResponse = controller.UpdateService(serviceId, testItem);
-      Assert.IsType<BadRequestResult>(badResponse);
+      var response = controller.UpdateService(serviceId, testItem);
+      Assert.IsType<BadRequestResult>(response);
     }
 
     [Fact]
@@ -111,8 +111,8 @@ namespace BasicBilling.Tests
     {
       int serviceId = 2;
       var testItem = new ServiceUpdateDto() { Shortname = "PHONE", Name = "Phone service" };
-      var createdResponse = controller.UpdateService(serviceId, testItem);
-      Assert.IsType<NoContentResult>(createdResponse);
+      var response = controller.UpdateService(serviceId, testItem);
+      Assert.IsType<NoContentResult>(response);
     }
 
     [Fact]
@@ -120,8 +120,8 @@ namespace BasicBilling.Tests
     {
       int serviceId = 2;
       var testItem = new ServiceUpdateDto() { Shortname = "PHONE", Name = "Phone service" };
-      var createdResponse = controller.UpdateService(serviceId, testItem);
-      Assert.IsType<NoContentResult>(createdResponse);
+      var response = controller.UpdateService(serviceId, testItem);
+      Assert.IsType<NoContentResult>(response);
 
       var okResult = controller.GetServiceById(serviceId).Result as OkObjectResult;
       Assert.IsType<ServiceReadDto>(okResult.Value);
