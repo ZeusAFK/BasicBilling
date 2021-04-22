@@ -3,11 +3,11 @@ using AutoMapper;
 using BasicBilling.Data.Entities;
 using BasicBilling.Data.Interfaces;
 using BasicBilling.Data.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BasicBilling.Controllers
 {
-
   [Route("clients")]
   [ApiController]
   public class ClientsController : ControllerBase

@@ -14,6 +14,7 @@ namespace BasicBilling.API
 {
   public class Startup
   {
+
     public Startup(IConfiguration configuration)
     {
       Configuration = configuration;
@@ -23,6 +24,8 @@ namespace BasicBilling.API
 
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
       services.AddDbContext<BasicBillingContext>(opt => opt.UseSqlite(Configuration.GetConnectionString("BasicBillingConnection")));
 
       services.AddControllers();
@@ -40,6 +43,8 @@ namespace BasicBilling.API
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+      app.UseCors("AllowAll");
+
       app.UseSwagger();
 
       app.UseSwaggerUI(c =>
